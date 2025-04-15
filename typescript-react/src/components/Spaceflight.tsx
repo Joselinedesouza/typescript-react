@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Card, Spinner, Container, Button} from 'react-bootstrap'
+import { Card, Spinner, Container, Button, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 interface Article {
   id: number
@@ -40,37 +41,34 @@ const FetchArticle: React.FC = () => {
   }, [])
 
   return (
-    <Container  className="text-center py-4"    style={{ minHeight: '100vh' }}>
-      <h2 className="my-4 text-primary fw-semibold">Spaceflight new..</h2>
+    <Container className="text-center py-4" style={{ minHeight: '100vh' }}>
+      <h2 className="my-4 text-primary fw-semibold">Spaceflight News</h2>
 
       {isLoading ? (
         <Spinner animation="border" />
       ) : (
-        articles.slice(0, 5).map((article) => (
-          <Card
-            key={article.id}
-            className="mb-4 mx-auto shadow"
-            style={{ width: '300px' }}
-          >
-            <Card.Img
-              variant="top"
-              src={article.image_url}
-              style={{ objectFit: 'cover', height: '200px', width: '100%' }}
-            />
-            <Card.Body>
-              <Card.Title>
-                <Link to={`/article/${article.id}`}>{article.title}</Link>
-              </Card.Title>
-              <Card.Text>{article.summary}</Card.Text>
-              <Button 
-              variant="primary" 
-              onClick={() => window.open(article.url, '_blank')}
-            >
-              Leggi su Spaceflight News
-            </Button>
-            </Card.Body>
-          </Card>
-        ))
+        <Row className="justify-content-center">
+          {articles.slice(0, 10).map((article) => (
+            <Col key={article.id} xs={12} sm={6} md={3} lg={3} className="mb-4">
+              <Card className="shadow">
+                <Card.Img
+                  variant="top"
+                  src={article.image_url}
+                  style={{ objectFit: 'cover', height: '200px', width: '100%' }}
+                />
+                <Card.Body>
+                  <Card.Title>
+                    <Link to={`/article/${article.id}`}>{article.title}</Link>
+                  </Card.Title>
+                  <Card.Text>{article.summary}</Card.Text>
+                  <Button variant="primary" onClick={() => window.open(article.url, '_blank')}>
+                    Leggi su Spaceflight News
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
       )}
     </Container>
   )

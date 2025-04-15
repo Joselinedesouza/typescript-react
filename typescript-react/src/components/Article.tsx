@@ -47,14 +47,14 @@ const Articles: React.FC = () => {
       {isLoading ? (
         <Spinner animation="border" style={{ color: 'white' }} />
       ) : article ? (
-        <Card className=" mx-auto" style={{ width: '300px', backgroundColor: 'white'}}>
+        <Card className=" mx-auto mt-5" style={{ width: '50%', backgroundColor: 'white'}}>
           <Card.Img
             variant="top"
             src={article.image_url}
-            style={{ objectFit: 'cover', height: '300px', width: '100%' }}
+            style={{ objectFit: 'cover', height: '500px', width: '100%' }}
           />
           <Card.Body className="d-flex flex-column align-items-center justify-content-center">
-            <Card.Title>{article.title}</Card.Title>
+            <Card.Title className="text-primary fs-3">{article.title}</Card.Title>
             <Card.Text>{article.summary}</Card.Text>
             <a href={article.url} target="_blank" rel="noopener noreferrer" style={{ color: 'primary' }}>
               Leggi l'articolo originale
